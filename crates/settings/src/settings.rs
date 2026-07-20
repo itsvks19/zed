@@ -116,10 +116,9 @@ impl fmt::Display for WorktreeId {
 }
 
 #[derive(RustEmbed)]
-#[folder = "../../assets"]
+#[folder = "src/assets"]
 #[include = "settings/*"]
 #[include = "keymaps/*"]
-#[exclude = "*.DS_Store"]
 pub struct SettingsAssets;
 
 pub fn init(cx: &mut App) {
@@ -129,11 +128,11 @@ pub fn init(cx: &mut App) {
 }
 
 pub fn default_settings() -> Cow<'static, str> {
-    asset_str::<SettingsAssets>("settings/default.json")
+    Cow::Borrowed(include_str!("default_settings.json"))
 }
 
 pub fn default_semantic_token_rules() -> Cow<'static, str> {
-    asset_str::<SettingsAssets>("settings/default_semantic_token_rules.json")
+    Cow::Borrowed(include_str!("default_semantic_token_rules.json"))
 }
 
 #[cfg(target_os = "macos")]
